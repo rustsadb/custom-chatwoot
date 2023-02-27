@@ -20,6 +20,14 @@ export default {
       custom_attributes: customAttributes,
     });
   },
+  setConversationsAttributes(customAttributes = {}) {
+    return API.patch(
+      buildUrl('widget/contact/update_conversations_attributes'),
+      {
+        custom_attributes: customAttributes,
+      }
+    );
+  },
   deleteCustomAttribute(customAttribute) {
     return API.post(buildUrl('widget/contact/destroy_custom_attributes'), {
       custom_attributes: [customAttribute],

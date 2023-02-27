@@ -6,11 +6,12 @@
         :class="$dm('text-black-700', 'dark:text-slate-50')"
       >
         <div class="text-base leading-5 font-medium mb-1">
-          {{
+          {{ $t('TEAM_AVAILABILITY.ONLINE') }}
+          <!-- {{
             isOnline
               ? $t('TEAM_AVAILABILITY.ONLINE')
               : $t('TEAM_AVAILABILITY.OFFLINE')
-          }}
+          }} -->
         </div>
         <div class="text-xs leading-4 mt-1">
           {{ replyWaitMessage }}

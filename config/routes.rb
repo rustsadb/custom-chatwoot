@@ -226,6 +226,7 @@ Rails.application.routes.draw do
           collection do
             post :destroy_custom_attributes
             patch :set_user
+            patch :update_conversations_attributes
           end
         end
         resources :inbox_members, only: [:index]

@@ -61,9 +61,10 @@ export default {
   },
   computed: {
     getStatusText() {
-      return this.config.isOnline
-        ? this.$t('INBOX_MGMT.WIDGET_BUILDER.BODY.TEAM_AVAILABILITY.ONLINE')
-        : this.$t('INBOX_MGMT.WIDGET_BUILDER.BODY.TEAM_AVAILABILITY.OFFLINE');
+      return this.$t('INBOX_MGMT.WIDGET_BUILDER.BODY.TEAM_AVAILABILITY.ONLINE');
+      // return this.config.isOnline
+      //   ? this.$t('INBOX_MGMT.WIDGET_BUILDER.BODY.TEAM_AVAILABILITY.ONLINE')
+      //   : this.$t('INBOX_MGMT.WIDGET_BUILDER.BODY.TEAM_AVAILABILITY.OFFLINE');
     },
     getWidgetBodyClass() {
       return {

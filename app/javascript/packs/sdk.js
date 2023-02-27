@@ -104,6 +104,16 @@ const runSDK = ({ baseUrl, websiteToken }) => {
       }
     },
 
+    setConversationsAttributes(customAttributes = {}) {
+      if (!customAttributes || !Object.keys(customAttributes).length) {
+        throw new Error('Custom attributes should have atleast one key');
+      } else {
+        IFrameHelper.sendMessage('set-conversations-attributes', {
+          customAttributes,
+        });
+      }
+    },
+
     deleteCustomAttribute(customAttribute = '') {
       if (!customAttribute) {
         throw new Error('Custom attribute is required');

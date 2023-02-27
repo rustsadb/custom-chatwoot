@@ -9,6 +9,20 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
     identify_contact(@contact)
   end
 
+  def update_conversations_attributes
+    @valid_params = params.permit(custom_attributes: {}).to_h
+    @contact.conversations.each do |conversation|
+      @conversation = conversation
+      @conversation.update!(custom_attributes: custom_attributes)
+    end
+  end
+
+  def custom_attributes
+    return @conversation.custom_attributes if @valid_params[:custom_attributes].blank?
+
+    (@conversation.custom_attributes || {}).deep_merge(@valid_params[:custom_attributes].stringify_keys)
+  end
+
   def set_user
     contact = nil
 

@@ -23,12 +23,13 @@
           :class="$dm('text-black-900', 'dark:text-slate-50')"
         >
           <span v-dompurify-html="title" class="mr-1" />
-          <div
+          <div class="h-2 w-2 rounded-full leading-4 hidden" />
+          <!-- <div
             :class="
               `h-2 w-2 rounded-full leading-4
               ${isOnline ? 'bg-green-500' : 'hidden'}`
             "
-          />
+          /> -->
         </div>
         <div
           class="text-xs mt-1"
@@ -94,9 +95,10 @@ export default {
       return anyAgentOnline;
     },
     replyWaitMessage() {
-      return this.isOnline
-        ? this.replyTimeStatus
-        : this.$t('TEAM_AVAILABILITY.OFFLINE');
+      return this.replyTimeStatus;
+      // return this.isOnline
+      //   ? this.replyTimeStatus
+      //   : this.$t('TEAM_AVAILABILITY.OFFLINE');
     },
   },
   methods: {

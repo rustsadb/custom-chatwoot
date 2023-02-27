@@ -94,6 +94,13 @@ export const actions = {
       // Ignore error
     }
   },
+  setConversationsAttributes: async (_, customAttributes = {}) => {
+    try {
+      await ContactsAPI.setConversationsAttributes(customAttributes);
+    } catch (error) {
+      // Ignore error
+    }
+  },
   deleteCustomAttribute: async (_, customAttribute) => {
     try {
       await ContactsAPI.deleteCustomAttribute(customAttribute);

@@ -269,6 +269,11 @@ export default {
             'contacts/setCustomAttributes',
             message.customAttributes
           );
+        } else if (message.event === 'set-conversations-attributes') {
+          this.$store.dispatch(
+            'contacts/setConversationsAttributes',
+            message.customAttributes
+          );
         } else if (message.event === 'delete-custom-attribute') {
           this.$store.dispatch(
             'contacts/deleteCustomAttribute',
