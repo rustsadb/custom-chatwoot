@@ -93,7 +93,9 @@ export default {
     };
   },
   mounted() {
-    this.sendMessage({ content: 'Здравствуйте' });
+    this.message = 'Здравствуйте!';
+    console.log(this);
+    this.onSubmit();
   },
   computed: {
     ...mapGetters({
