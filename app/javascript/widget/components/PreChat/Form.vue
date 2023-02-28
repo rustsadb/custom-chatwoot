@@ -58,7 +58,7 @@
 <script>
 import CustomButton from 'shared/components/Button';
 import Spinner from 'shared/components/Spinner';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { getContrastingTextColor } from '@chatwoot/utils';
 
 import { isEmptyObject } from 'widget/helpers/utils';
@@ -91,6 +91,9 @@ export default {
         phoneNumber: 'PHONE_NUMBER',
       },
     };
+  },
+  mounted() {
+    this.sendMessage({ content: 'Здравствуйте' });
   },
   computed: {
     ...mapGetters({
@@ -185,6 +188,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions('conversation', [
+      'sendMessage'
+    ]),
     labelClass(context) {
       const { hasErrors } = context;
       if (!hasErrors) {
