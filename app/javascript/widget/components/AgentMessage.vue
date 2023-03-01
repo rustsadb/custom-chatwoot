@@ -40,13 +40,20 @@
             <file-bubble v-else :url="attachment.data_url" />
           </div>
         </div>
-        <p
-          v-if="message.showAvatar || hasRecordedResponse"
-          class="agent-name"
+        <div
+          class="flex flex-row"
           :class="$dm('text-slate-700', 'dark:text-slate-200')"
         >
-          {{ agentName }}
-        </p>
+          <p
+            v-if="message.showAvatar || hasRecordedResponse"
+            class="agent-name"
+          >
+            {{ agentName }}
+          </p>
+          <div class="time">
+            {{ readableTime }}
+          </div>
+        </div>
       </div>
     </div>
 
@@ -73,6 +80,7 @@ import configMixin from '../mixins/configMixin';
 import messageMixin from '../mixins/messageMixin';
 import { isASubmittedFormMessage } from 'shared/helpers/MessageTypeHelper';
 import darkModeMixin from 'widget/mixins/darkModeMixin.js';
+import { ru } from 'date-fns/esm/locale';
 
 export default {
   name: 'AgentMessage',
@@ -108,7 +116,7 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
-      return this.messageStamp(createdAt, 'LLL d yyyy, h:mm a');
+      return this.messageStamp(createdAt, 'd LLL yyyy, HH:mm', { locale: ru });
     },
     messageType() {
       const { message_type: type = 1 } = this.message;

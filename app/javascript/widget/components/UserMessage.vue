@@ -48,6 +48,12 @@
         </div>
       </div>
     </div>
+    <div
+      class="time text-right pr-3"
+      :class="$dm('text-slate-700', 'dark:text-slate-200')"
+    >
+      {{ readableTime }}
+    </div>
   </div>
 </template>
 
@@ -58,7 +64,9 @@ import FluentIcon from 'shared/components/FluentIcon/Index';
 import FileBubble from 'widget/components/FileBubble';
 import timeMixin from 'dashboard/mixins/time';
 import messageMixin from '../mixins/messageMixin';
+import darkModeMixin from 'widget/mixins/darkModeMixin.js';
 import { mapGetters } from 'vuex';
+import { ru } from 'date-fns/esm/locale';
 
 export default {
   name: 'UserMessage',
@@ -68,7 +76,7 @@ export default {
     FileBubble,
     FluentIcon,
   },
-  mixins: [timeMixin, messageMixin],
+  mixins: [timeMixin, messageMixin, darkModeMixin],
   props: {
     message: {
       type: Object,
@@ -95,7 +103,7 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
-      return this.messageStamp(createdAt);
+      return this.messageStamp(createdAt, 'd LLL yyyy, HH:mm', { locale: ru });
     },
     isFailed() {
       const { status = '' } = this.message;
