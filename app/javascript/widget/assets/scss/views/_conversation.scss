@@ -44,7 +44,7 @@
   .agent-name {
     font-size: $font-size-small;
     font-weight: $font-weight-medium;
-    margin: $space-small 0;
+    margin: $space-small $space-smaller $space-small 0;
     padding-left: $space-micro;
   }
 
@@ -144,6 +144,12 @@
 
   p:not(:last-child) {
     margin-bottom: $space-normal;
+  }
+
+  .time {
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    margin: $space-small 0;
   }
 }
 

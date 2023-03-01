@@ -4,17 +4,17 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 export default {
   methods: {
-    messageStamp(time, dateFormat = 'h:mm a') {
+    messageStamp(time, dateFormat = 'h:mm a', options = {}) {
       const unixTime = fromUnixTime(time);
-      return format(unixTime, dateFormat);
+      return format(unixTime, dateFormat, options);
     },
-    dynamicTime(time) {
+    dynamicTime(time, options = { addSuffix: true }) {
       const unixTime = fromUnixTime(time);
-      return formatDistanceToNow(unixTime, { addSuffix: true });
+      return formatDistanceToNow(unixTime, options);
     },
-    dateFormat(time, dateFormat = 'MMM d, yyyy') {
+    dateFormat(time, dateFormat = 'MMM d, yyyy', options = {}) {
       const unixTime = fromUnixTime(time);
-      return format(unixTime, dateFormat);
+      return format(unixTime, dateFormat, options);
     },
     shortTimestamp(time) {
       const convertToShortTime = time
