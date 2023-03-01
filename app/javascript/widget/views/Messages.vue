@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import ChatFooter from '../components/ChatFooter.vue';
 import ConversationWrap from '../components/ConversationWrap.vue';
 
@@ -22,6 +22,13 @@ export default {
   },
   mounted() {
     this.$store.dispatch('conversation/setUserLastSeen');
+
+    if (this.groupedMessages.length === 0) {
+      this.sendMessage({ content: 'Здравствуйте!' });
+    }
+  },
+  methods: {
+    ...mapActions('conversation', ['sendMessage']),
   },
 };
 </script>
