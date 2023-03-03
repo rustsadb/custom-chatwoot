@@ -13,9 +13,9 @@
               : $t('TEAM_AVAILABILITY.OFFLINE')
           }} -->
         </div>
-        <div class="text-xs leading-4 mt-1">
+        <!-- <div class="text-xs leading-4 mt-1">
           {{ replyWaitMessage }}
-        </div>
+        </div> -->
       </div>
       <available-agents v-if="isOnline" :agents="availableAgents" />
     </div>
