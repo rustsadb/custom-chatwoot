@@ -6,6 +6,7 @@ json.payload do
     json.content_type message.content_type
     json.content_attributes message.content_attributes
     json.created_at message.created_at.to_i
+    json.submitted_at message.submitted_at.to_i
     json.conversation_id message.conversation.display_id
     json.attachments message.attachments.map(&:push_event_data) if message.attachments.present?
     json.sender message.sender.push_event_data if message.sender

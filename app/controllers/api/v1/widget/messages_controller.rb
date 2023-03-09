@@ -20,7 +20,7 @@ class Api::V1::Widget::MessagesController < Api::V1::Widget::BaseController
         params: { email: contact_email }
       ).perform
     else
-      @message.update!(message_update_params[:message])
+      @message.update!(message_update_params[:message].merge({ submitted_at: DateTime.now }))
     end
   rescue StandardError => e
     render json: { error: @contact.errors, message: e.message }.to_json, status: :internal_server_error
