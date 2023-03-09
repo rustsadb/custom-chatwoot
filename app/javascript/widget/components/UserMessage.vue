@@ -103,6 +103,11 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
+
+      if (!createdAt) {
+        return '';
+      }
+
       return this.messageStamp(createdAt, 'd LLL yyyy, HH:mm', { locale: ru });
     },
     isFailed() {

@@ -116,6 +116,11 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
+
+      if (!createdAt) {
+        return '';
+      }
+
       return this.messageStamp(createdAt, 'd LLL yyyy, HH:mm', { locale: ru });
     },
     messageType() {
@@ -180,6 +185,7 @@ export default {
         submittedValue => ({
           id: submittedValue.name,
           content: submittedValue.value,
+          created_at: this.message.submitted_at,
         })
       );
     },
