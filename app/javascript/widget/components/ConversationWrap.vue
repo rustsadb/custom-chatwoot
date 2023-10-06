@@ -1,9 +1,6 @@
 <template>
   <div class="conversation--container" :class="colorSchemeClass">
     <div class="conversation-wrap" :class="{ 'is-typing': isAgentTyping }">
-      <div v-if="isFetchingList" class="message--loader">
-        <spinner />
-      </div>
       <div
         v-for="groupedMessage in groupedMessages"
         :key="groupedMessage.date"
@@ -25,7 +22,6 @@
 import ChatMessage from 'widget/components/ChatMessage.vue';
 import AgentTypingBubble from 'widget/components/AgentTypingBubble.vue';
 import DateSeparator from 'shared/components/DateSeparator.vue';
-import Spinner from 'shared/components/Spinner.vue';
 import darkModeMixin from 'widget/mixins/darkModeMixin';
 
 import { mapActions, mapGetters } from 'vuex';
@@ -36,7 +32,6 @@ export default {
     ChatMessage,
     AgentTypingBubble,
     DateSeparator,
-    Spinner,
   },
   mixins: [darkModeMixin],
   props: {
@@ -71,6 +66,9 @@ export default {
   mounted() {
     this.$el.addEventListener('scroll', this.handleScroll);
     this.scrollToBottom();
+
+    window.addEventListener('online', this.refetchOnUserIsOnline);
+    document.addEventListener('visibilitychange', this.refetchOnDocumentFocus);
   },
   updated() {
     if (this.previousConversationSize !== this.conversationSize) {
@@ -80,6 +78,12 @@ export default {
   },
   unmounted() {
     this.$el.removeEventListener('scroll', this.handleScroll);
+
+    window.removeEventListener('online', this.refetchOnUserIsOnline);
+    document.removeEventListener(
+      'visibilitychange',
+      this.refetchOnDocumentFocus
+    );
   },
   methods: {
     ...mapActions('conversation', ['fetchOldConversations']),
@@ -101,6 +105,14 @@ export default {
         this.fetchOldConversations({ before: this.earliestMessage.id });
         this.previousScrollHeight = this.$el.scrollHeight;
       }
+    },
+    refetchOnDocumentFocus() {
+      if (document.visibilityState === 'visible') {
+        this.fetchOldConversations();
+      }
+    },
+    refetchOnUserIsOnline() {
+      this.fetchOldConversations();
     },
   },
 };
